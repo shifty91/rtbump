@@ -70,7 +70,7 @@ sub print_usage_and_die
 
     local $| = 1;
 
-    print <<'EOF';
+    print <<"EOF";
 usage: $0 [options]
 
 options:

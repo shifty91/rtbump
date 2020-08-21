@@ -36,7 +36,8 @@ use Getopt::Long;
 use Term::ANSIColor qw(:constants);
 
 # config
-my (%rt_branches, $branch, $help, $linux_dir, $gentoo_dir, $rt_sources_dir);
+my (%rt_branches, $branch, $dry_run, $help, $linux_dir, $gentoo_dir,
+    $rt_sources_dir);
 
 $linux_dir      = "$ENV{HOME}/git/linux";
 $gentoo_dir     = "$ENV{HOME}/git/gentoo";
@@ -73,8 +74,9 @@ sub print_usage_and_die
 usage: $0 [options]
 
 options:
-    --help,   -h: Show this help
-    --branch, -b: The branch created
+    --branch,  -b: The branch created
+    --dry_run, -d: Dry run
+    --help,    -h: Show this help
 EOF
 
     exit -1;
@@ -82,8 +84,10 @@ EOF
 
 sub get_args
 {
-    GetOptions("help"   => \$help,
-               "branch" => \$branch) || print_usage_and_die();
+    GetOptions("help"    => \$help,
+               "branch"  => \$branch,
+               "dry_run" => \$dry_run,
+              ) || print_usage_and_die();
 
     print_usage_and_die() if $help;
 
@@ -177,7 +181,7 @@ sub create_gentoo_repo_branch
     print "Creating branch ";
     print_green("$branch");
     print "...\n";
-    cmd_ex("git checkout -b $branch");
+    cmd_ex("git checkout -b $branch") unless $dry_run;
 }
 
 sub rt_version_to_int
@@ -241,13 +245,14 @@ sub main
         chdir $rt_sources_dir || kurt_err("Failed to change to $rt_sources_dir: $!");
         unless (-e $ebuild) {
             copy($rt_branches{$branch}{ebuild}, $ebuild) ||
-                kurt_err("Copy failed: $!");
+                kurt_err("Copy failed: $!") unless $dry_run;
             print "Created new ebuild ";
             print_green("$ebuild\n");
 
             print "Running repoman...\n";
-            cmd_ex("git add $ebuild");
-            cmd_ex("repoman ci -m 'sys-kernel/rt-sources: Add rt sources $latest'");
+            cmd_ex("git add $ebuild") unless $dry_run;
+            cmd_ex("repoman ci -m 'sys-kernel/rt-sources: Add rt sources $latest'")
+                unless $dry_run;
         }
     }
 }

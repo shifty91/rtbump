@@ -158,6 +158,8 @@ sub update_linux_repo
 
     print "Update Linux repo...\n";
     cmd_ex("git remote update");
+
+    return;
 }
 
 sub update_gentoo_repo
@@ -168,6 +170,8 @@ sub update_gentoo_repo
     cmd_ex("git checkout master");
     cmd_ex("git remote update");
     cmd_ex("git merge --ff upstream/master");
+
+    return;
 }
 
 sub create_gentoo_repo_branch
@@ -182,6 +186,8 @@ sub create_gentoo_repo_branch
     print_green("$branch");
     print "...\n";
     cmd_ex("git checkout -b $branch") unless $dry_run;
+
+    return;
 }
 
 sub rt_version_to_int
@@ -259,6 +265,8 @@ sub main
         cmd_ex("repoman ci -m 'sys-kernel/rt-sources: Add rt sources $latest'")
             unless $dry_run;
     }
+
+    return;
 }
 
 main();

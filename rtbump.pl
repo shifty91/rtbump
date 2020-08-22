@@ -242,18 +242,22 @@ sub main
         $latest = get_latest_rt_release($branch);
         $ebuild = rt_version_to_gentoo($latest);
 
-        chdir $rt_sources_dir || kurt_err("Failed to change to $rt_sources_dir: $!");
-        unless (-e $ebuild) {
-            copy($rt_branches{$branch}{ebuild}, $ebuild) ||
-                kurt_err("Copy failed: $!") unless $dry_run;
-            print "Created new ebuild ";
-            print_green("$ebuild\n");
+        chdir $rt_sources_dir ||
+            kurt_err("Failed to change to $rt_sources_dir: $!");
 
-            print "Running repoman...\n";
-            cmd_ex("git add $ebuild") unless $dry_run;
-            cmd_ex("repoman ci -m 'sys-kernel/rt-sources: Add rt sources $latest'")
-                unless $dry_run;
-        }
+        next if -e $ebuild;
+
+        # create ebuild
+        copy($rt_branches{$branch}{ebuild}, $ebuild) ||
+            kurt_err("Copy failed: $!") unless $dry_run;
+        print "Created new ebuild ";
+        print_green("$ebuild\n");
+
+        # Add the ebuild, generate manifest and run repoman
+        print "Running repoman...\n";
+        cmd_ex("git add $ebuild") unless $dry_run;
+        cmd_ex("repoman ci -m 'sys-kernel/rt-sources: Add rt sources $latest'")
+            unless $dry_run;
     }
 }
 

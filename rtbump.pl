@@ -196,11 +196,11 @@ sub rt_version_to_int
     my ($major, $minor, $stable, $rt);
 
     unless (($major, $minor, $stable, $rt) =
-            $rt_version =~ /v(\d+)\.(\d+)\.(\d+)-rt(\d+)/) {
+            $rt_version =~ /v(\d+)\.(\d+)\.(\d+)-rt(\d+)/x) {
         return 0;
     }
 
-    return 0 if $rt_version =~ /rebase|patches/;
+    return 0 if $rt_version =~ /rebase|patches/x;
 
     return $major * 1000 + $minor * 100 + $stable * 10 + $rt;
 }
@@ -214,7 +214,7 @@ sub get_latest_rt_release
 
     $cmd = cmd_ex("git tag -l 'v$branch*rt*'");
 
-    @tags = split /\n/, $cmd->[0]->[0];
+    @tags = split /\n/x, $cmd->[0]->[0];
     @tags = sort { rt_version_to_int($a) <=> rt_version_to_int($b) } @tags;
 
     return pop @tags;
@@ -226,7 +226,7 @@ sub rt_version_to_gentoo
     my ($major, $minor, $stable, $rt);
 
     unless (($major, $minor, $stable, $rt) =
-            $rt_version =~ /v(\d+)\.(\d+)\.(\d+)-rt(\d+)/) {
+            $rt_version =~ /v(\d+)\.(\d+)\.(\d+)-rt(\d+)/x) {
         kurt_err("Invalid rt version $rt_version");
     }
 

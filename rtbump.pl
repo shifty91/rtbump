@@ -36,8 +36,8 @@ use Getopt::Long;
 use Term::ANSIColor qw(:constants);
 
 # config
-my (%rt_branches, $branch, $dry_run, $help, $linux_dir, $gentoo_dir,
-    $rt_sources_dir);
+my (%rt_branches, $verbose, $branch, $dry_run, $help, $linux_dir,
+    $gentoo_dir, $rt_sources_dir);
 
 $linux_dir      = "$ENV{HOME}/git/linux";
 $gentoo_dir     = "$ENV{HOME}/git/gentoo";
@@ -87,6 +87,7 @@ sub get_args
     GetOptions("help"     => \$help,
                "branch=s" => \$branch,
                "dry_run"  => \$dry_run,
+               "verbose"  => \$verbose,
               ) || print_usage_and_die();
 
     print_usage_and_die() if $help;
@@ -136,7 +137,7 @@ sub cmd_ex
 {
     my ($cmd) = @_;
     my ($success, $error_message, $full_buf, $stdout_buf, $stderr_buf) =
-        run(command => $cmd, verbose => 0);
+        run(command => $cmd, verbose => $verbose);
 
     kurt_err("Command \"$cmd\" failed") unless $success;
 
@@ -147,7 +148,7 @@ sub cmd
 {
     my ($cmd) = @_;
     my ($success, $error_message, $full_buf, $stdout_buf, $stderr_buf) =
-        run(command => $cmd, verbose => 0);
+        run(command => $cmd, verbose => $verbose);
 
     return [ $success, $stdout_buf, $stderr_buf ];
 }

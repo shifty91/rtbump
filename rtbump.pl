@@ -264,6 +264,14 @@ sub main
         cmd_ex("git add $ebuild") unless $dry_run;
         cmd_ex("repoman ci -m 'sys-kernel/rt-sources: Add rt sources $latest'")
             unless $dry_run;
+
+        # Try to build it
+        print "Merge it..\n";
+        cmd_ex("sudo ebuild $ebuild clean merge") unless $dry_run;
+
+        # Cleanup
+        print "Unmerge it..\n";
+        cmd_ex("sudo ebuild $ebuild unmerge") unless $dry_run;
     }
 
     return;

@@ -84,9 +84,9 @@ EOF
 
 sub get_args
 {
-    GetOptions("help"    => \$help,
-               "branch"  => \$branch,
-               "dry_run" => \$dry_run,
+    GetOptions("help"     => \$help,
+               "branch=s" => \$branch,
+               "dry_run"  => \$dry_run,
               ) || print_usage_and_die();
 
     print_usage_and_die() if $help;

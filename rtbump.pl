@@ -77,6 +77,7 @@ options:
     --branch,  -b: The branch created
     --dry_run, -d: Dry run
     --help,    -h: Show this help
+    --verbose, -v: Verbose output
 EOF
 
     exit -1;

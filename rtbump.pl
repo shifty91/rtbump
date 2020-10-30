@@ -45,22 +45,22 @@ $rt_sources_dir = "$gentoo_dir/sys-kernel/rt-sources";
 
 %rt_branches = (
     4.4 => {
-        ebuild => "rt-sources-4.4.231_p202.ebuild",
+        ebuild => "rt-sources-4.4.236_p207.ebuild",
     },
     4.9 => {
-        ebuild => "rt-sources-4.9.232_p150.ebuild",
+        ebuild => "rt-sources-4.9.236_p154.ebuild",
     },
     4.14 => {
-        ebuild => "rt-sources-4.14.192_p91.ebuild",
+        ebuild => "rt-sources-4.14.198_p96.ebuild",
     },
     4.19 => {
-        ebuild => "rt-sources-4.19.135_p60.ebuild",
+        ebuild => "rt-sources-4.19.142_p63.ebuild",
     },
     5.4 => {
-        ebuild => "rt-sources-5.4.54_p33.ebuild",
+        ebuild => "rt-sources-5.4.66_p38.ebuild",
     },
     5.6 => {
-        ebuild => "rt-sources-5.6.19_p11.ebuild",
+        ebuild => "rt-sources-5.6.19_p12.ebuild",
     },
 );
 

@@ -62,6 +62,9 @@ $rt_sources_dir = "$gentoo_dir/sys-kernel/rt-sources";
     5.6 => {
         ebuild => "rt-sources-5.6.19_p12.ebuild",
     },
+    5.9 => {
+        ebuild => "rt-sources-5.6.19_p12.ebuild"
+    },
 );
 
 sub print_usage_and_die

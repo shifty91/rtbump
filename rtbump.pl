@@ -59,11 +59,11 @@ $rt_sources_dir = "$gentoo_dir/sys-kernel/rt-sources";
     5.4 => {
         ebuild => "rt-sources-5.4.66_p38.ebuild",
     },
-    5.6 => {
-        ebuild => "rt-sources-5.6.19_p12.ebuild",
-    },
     5.9 => {
-        ebuild => "rt-sources-5.6.19_p12.ebuild"
+        ebuild => "rt-sources-5.9.1_p20.ebuild"
+    },
+    5.10 => {
+        ebuild => "rt-sources-5.9.1_p20.ebuild"
     },
 );
 

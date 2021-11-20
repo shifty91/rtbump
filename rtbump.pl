@@ -24,9 +24,9 @@ $gentoo_dir     = "$ENV{HOME}/git/gentoo";
 $rt_sources_dir = "$gentoo_dir/sys-kernel/rt-sources";
 
 %rt_branches = (
-    4.4 => {
-        ebuild => "rt-sources-4.4.277_p224-r1.ebuild",
-    },
+    # 4.4 => {
+    #     ebuild => "rt-sources-4.4.277_p224-r1.ebuild",
+    # },
     4.9 => {
         ebuild => "rt-sources-4.9.282_p187.ebuild",
     },
@@ -40,6 +40,9 @@ $rt_sources_dir = "$gentoo_dir/sys-kernel/rt-sources";
         ebuild => "rt-sources-5.4.143_p64.ebuild",
     },
     5.10 => {
+        ebuild => "rt-sources-5.10.59_p52.ebuild"
+    },
+    5.15 => {
         ebuild => "rt-sources-5.10.59_p52.ebuild"
     },
 );
